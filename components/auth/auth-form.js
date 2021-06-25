@@ -65,6 +65,20 @@ function AuthForm() {
     } else {
       try {
         const result = await createNewUser(enteredEmail, enteredPassword);
+
+        const newRresult = await signIn("credentials", {
+          redirect: false,
+
+          email: enteredEmail,
+          password: enteredPassword,
+        });
+
+        // console.log(result);
+
+        if (!result.error) {
+          // set some state
+          router.replace("/profile");
+        }
         // console.log(result);
       } catch (err) {
         console.log(err);
